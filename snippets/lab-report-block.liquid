@@ -1,0 +1,67 @@
+<style>
+  .nh-top-report-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:16px 18px;
+
+    border-bottom:1px solid #e4bede;
+
+    text-decoration:none;
+
+    transition:0.3s ease;
+  }
+
+  .nh-top-report-bar:hover{
+    opacity:0.9;
+  }
+
+  .nh-report-title{
+    font-size:15px;
+    font-weight:600;
+    color:#7B2678;
+    line-height:1.3;
+  }
+
+  .nh-report-link{
+    font-size:15px;
+    font-weight:600;
+    color:#7B2678;
+
+    text-decoration:underline;
+
+    white-space:nowrap;
+  }
+
+  @media screen and (max-width:749px){
+
+    .nh-top-report-bar{
+      padding:14px 16px;
+    }
+
+    .nh-report-title,
+    .nh-report-link{
+      font-size:14px;
+    }
+
+  }
+</style>
+
+{% if product.metafields.custom.lab_report != blank %}
+  <a
+    href="{{ product.metafields.custom.lab_report | file_url }}"
+    target="_blank"
+    class="nh-top-report-bar"
+  >
+    <div class="nh-report-title">
+      {{ block.settings.heading }}
+    </div>
+
+    <div class="nh-report-link">
+      {{ block.settings.link_text }}
+    </div>
+  </a>
+{% endif %}

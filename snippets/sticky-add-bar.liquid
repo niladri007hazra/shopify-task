@@ -1,0 +1,188 @@
+
+<style>
+
+  .nh-sticky-cart-bar{
+    display:none;
+  }
+
+  .nh-sticky-cart-bar .jdgm-prev-badge__text {
+    display: none;
+  }
+
+  .nh-sticky-cart-bar .jdgm-star {
+    color: #FCC737;
+  }
+
+  span.nh-review-count {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  @media screen and (max-width:749px){
+
+    .nh-sticky-cart-bar{
+      display:block;
+
+      position:fixed;
+      left:0;
+      bottom:0;
+
+      width:100%;
+
+      z-index:999;
+
+      transform:translateY(120%);
+      transition:all .3s ease;
+    }
+
+    .nh-sticky-cart-bar.show{
+      transform:translateY(0);
+    }
+
+    .nh-sticky-top{
+      background:#6d216d;
+
+      color:#fff;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+
+      font-size:12px;
+      font-weight:500;
+
+      padding:6px 10px;
+    }
+
+
+    .nh-sticky-inner{
+      background:#fff;
+
+      padding:10px 12px;
+
+      display:flex;
+      gap:10px;
+
+      box-shadow:0 -4px 20px rgba(0,0,0,.08);
+    }
+
+
+    .nh-sticky-add,
+    .nh-sticky-buy{
+      flex:1;
+
+      height:52px;
+
+      border-radius:40px;
+
+      font-size:16px;
+      font-weight:700;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+
+      cursor:pointer;
+    }
+
+    .nh-sticky-add{
+      background:#fff;
+
+      border:2px solid #6d216d;
+
+      color:#6d216d;
+    }
+
+    .nh-sticky-buy{
+      background:#6d216d;
+
+      border:none;
+
+      color:#fff;
+    }
+
+  }
+</style>
+
+
+<div class="nh-sticky-cart-bar" id="nhStickyCart">
+  <!-- TOP STRIP -->
+  <div class="nh-sticky-top">
+    <span class="nh-rating">
+      {{ product.metafields.judgeme.badge }}
+    </span>
+    <span class="nh-rating-value">
+      {{ product.metafields.reviews.rating.value.rating | round: 1 }}
+    </span>
+
+    <span class="nh-seperate">|</span>
+
+    <span class="nh-review-count">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <circle cx="6" cy="3" r="2" fill="#FCC737"/>
+        <ellipse opacity="0.5" cx="6" cy="8.5" rx="3.5" ry="2" fill="#FCC737"/>
+        </svg>
+        {{ product.metafields.reviews.rating_count }} Customers
+    </span>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="nh-sticky-inner">
+    <!-- ADD TO CART -->
+    <button
+      type="submit"
+      form="{{ product_form_id }}"
+      class="nh-sticky-add"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M6 7L4 20H20L18 7" stroke="currentColor" stroke-width="2"/>
+        <path d="M9 10V5C9 3.34315 10.3431 2 12 2C13.6569 2 15 3.34315 15 5V10" stroke="currentColor" stroke-width="2"/>
+      </svg>
+
+      Add to Cart
+    </button>
+
+    <!-- BUY NOW -->
+    <button
+      type="submit"
+      name="checkout"
+      form="{{ product_form_id }}"
+      class="nh-sticky-buy"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M13 2L4 14H11L10 22L20 9H13L13 2Z"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linejoin="round"/>
+      </svg>
+
+      Buy it Now
+    </button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buyButtons = document.querySelector('.product-form__buttons');
+    const stickyBar = document.getElementById('nhStickyCart');
+
+    if (!buyButtons || !stickyBar) return;
+
+    function toggleStickyBar() {
+      const rect = buyButtons.getBoundingClientRect();
+
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        stickyBar.classList.remove('show');
+      } else {
+        stickyBar.classList.add('show');
+      }
+    }
+
+    toggleStickyBar();
+
+    window.addEventListener('scroll', toggleStickyBar);
+    window.addEventListener('resize', toggleStickyBar);
+  });
+</script>

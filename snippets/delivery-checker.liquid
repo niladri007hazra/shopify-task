@@ -1,0 +1,238 @@
+<style>
+.nh-delivery-checker{
+  background:#F4EEF3;
+  padding:20px;
+  width:100%;
+}
+
+.nh-delivery-title{
+  font-size:16px;
+  font-weight:600;
+  color:#7B2678;
+  margin-bottom:16px;
+  line-height:1;
+}
+
+.nh-delivery-form{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.nh-input-wrapper{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  height:54px;
+
+  border:1.5px solid #A03B98;
+  border-radius:40px;
+
+  padding:0 18px;
+
+  background:transparent;
+}
+
+.nh-location-icon{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+
+.nh-input-wrapper input{
+  width:100% !important;
+
+  border:none !important;
+  outline:none !important;
+  box-shadow:none !important;
+
+  background:transparent !important;
+
+  padding:0 !important;
+  margin:0 !important;
+
+  font-size:14px;
+  font-weight:400;
+  color:#555;
+
+  min-height:auto !important;
+}
+
+.nh-input-wrapper input::placeholder{
+  color:#9D8D9B;
+  opacity:1;
+}
+
+.nh-input-wrapper input:focus,
+.nh-input-wrapper input:focus-visible{
+  border:none !important;
+  outline:none !important;
+  box-shadow:none !important;
+}
+
+.nh-submit-btn{
+  width: 120px !important;
+  height:54px;
+
+  border-radius:40px;
+  border:1.5px solid #A03B98;
+
+  background:transparent !important;
+
+  color:#7B2678;
+
+  font-size:15px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:0.3s ease;
+
+  padding:0 !important;
+  margin:0 !important;
+
+  box-shadow:none !important;
+}
+
+.nh-submit-btn:hover{
+  background:#7B2678 !important;
+  color:#fff;
+}
+
+.nh-delivery-result{
+  margin-top:14px;
+  font-size:14px;
+  font-weight:500;
+}
+
+@media screen and (max-width:749px){
+
+  .nh-delivery-form{
+    grid-template-columns:1fr;
+  }
+
+  .nh-submit-btn{
+    width:100%;
+  }
+
+}
+
+</style>
+
+<div class="nh-delivery-checker">
+
+  <div class="nh-delivery-title">
+    Check Delivery Date
+  </div>
+
+  <div class="nh-delivery-form">
+
+    <div class="nh-input-wrapper">
+
+      <span class="nh-location-icon">
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+          <path d="M12 21s7-4.35 7-11a7 7 0 1 0-14 0c0 6.65 7 11 7 11Z" stroke="#8B2C8F" stroke-width="1.7"/>
+          <circle cx="12" cy="10" r="2.5" stroke="#8B2C8F" stroke-width="1.7"/>
+        </svg>
+
+      </span>
+
+      <input
+        type="text"
+        class="delivery-pincode"
+        placeholder="Enter Your Pincode"
+        maxlength="6"
+      >
+
+    </div>
+
+    <button type="button" class="nh-submit-btn">
+      Submit
+    </button>
+
+  </div>
+
+  <div class="nh-delivery-result"></div>
+
+</div>
+
+<script>
+document.addEventListener("click", function(e){
+
+  if(e.target.classList.contains("nh-submit-btn")){
+
+    const wrapper = e.target.closest(".nh-delivery-checker");
+
+    const input = wrapper.querySelector(".delivery-pincode");
+    const result = wrapper.querySelector(".nh-delivery-result");
+
+    let pincode = input.value.trim();
+
+
+    pincode = pincode.replace(/\s/g, '');
+
+
+    if(!/^\d{6}$/.test(pincode)){
+
+      result.innerHTML = "Invalid pincode";
+      result.style.color = "red";
+
+      return;
+    }
+
+
+    const pin = parseInt(pincode);
+
+
+    if(pin >= 700001 && pin <= 700156){
+
+      result.innerHTML = `
+        <span style="color:green;font-weight:600;">
+          Delivery within 2 Days
+        </span>
+      `;
+
+      return;
+    }
+
+
+    if(pin >= 700000 && pin <= 799999){
+
+      result.innerHTML = `
+        <span style="color:#7a2b7b;font-weight:600;">
+          Delivery within 5 - 6 Days
+        </span>
+      `;
+
+      return;
+    }
+
+    if(
+      (pin >= 100000 && pin <= 699999) ||
+      (pin >= 800000 && pin <= 999999)
+    ){
+
+      result.innerHTML = `
+        <span style="color:#7a2b7b;font-weight:600;">
+          Delivery within 10 Days
+        </span>
+      `;
+
+      return;
+    }
+
+
+    result.innerHTML = `
+      <span style="color:red;font-weight:600;">
+        No Shipping Available
+      </span>
+    `;
+
+  }
+
+});
+</script>

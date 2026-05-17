@@ -1,0 +1,143 @@
+<div class="nh-product-rating-strip">
+
+  <!-- REVIEW SECTION -->
+  <div class="nh-rating-left">
+
+    <span class="nh-stars">
+      {{ product.metafields.judgeme.badge }}
+    </span>
+
+    {% if product.metafields.reviews.rating.value != blank %}
+
+      <span class="nh-review-text">
+
+        [{{ product.metafields.reviews.rating.value.rating | round: 1 }}
+        -
+        {{ product.metafields.reviews.rating_count }}
+        Reviews]
+
+      </span>
+
+    {% endif %}
+
+  </div>
+
+  <!-- UNITS SOLD -->
+  <div class="nh-units-sold">
+
+    <span class="nh-sold-icon">
+      ✓
+    </span>
+
+    <span>
+
+      {% if product.metafields.custom.units_sold != blank %}
+
+        {{ product.metafields.custom.units_sold }}
+
+      {% else %}
+
+        1K+ Units Sold
+
+      {% endif %}
+
+    </span>
+
+  </div>
+
+</div>
+
+<style>
+
+.nh-product-rating-strip {
+  display:flex;
+  flex-wrap: wrap;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:14px;
+
+  margin:14px 0;
+}
+.nh-product-rating-strip .jdgm-star {
+    color: #FCC737;
+  }
+.nh-product-rating-strip .jdgm-prev-badge__text {
+  display:none;
+}
+.nh-rating-left{
+  display:flex;
+  align-items:center;
+
+  gap:6px;
+}
+
+.nh-stars{
+  color:#f4b400;
+
+  font-size:18px;
+
+  line-height:1;
+
+  letter-spacing:1px;
+}
+
+.nh-review-text{
+  color:#7a2b7a;
+
+  font-size:13px;
+  font-weight:500;
+}
+
+
+
+.nh-units-sold{
+  display:flex;
+  align-items:center;
+
+  gap:6px;
+
+  color:#4b9b63;
+
+  font-size:13px;
+  font-weight:500;
+}
+
+.nh-sold-icon{
+  width:18px;
+  height:18px;
+
+  border-radius:50%;
+
+  background:#dff3e7;
+
+  color:#4b9b63;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:11px;
+}
+
+
+@media screen and (max-width:749px){
+
+  .nh-product-rating-strip{
+    flex-wrap:wrap;
+
+    gap:10px;
+  }
+
+  .nh-stars{
+    font-size:16px;
+  }
+
+  .nh-review-text,
+  .nh-units-sold{
+    font-size:12px;
+  }
+
+}
+
+</style>

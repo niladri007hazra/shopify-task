@@ -1,0 +1,33 @@
+<style>
+.nh-product-offer-banner{
+  display:block;
+  width:100%;
+  margin-top:18px;
+}
+
+.nh-product-offer-banner img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:14px;
+}
+</style>
+
+{% if block.settings.banner_image != blank %}
+
+<a
+  href="{{ block.settings.banner_url }}"
+  class="nh-product-offer-banner"
+>
+
+  <img
+    src="{{ block.settings.banner_image | image_url: width: 1200 }}"
+    alt="Offer Banner"
+    width=""
+    height=""
+    loading="lazy"
+  >
+
+</a>
+
+{% endif %}
