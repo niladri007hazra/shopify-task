@@ -1,4 +1,7 @@
 # shopify-task
+Preview link: https://gaea-purpose-driven-test.myshopify.com/products/pure-plant-protein-for-women-500gm?preview_theme_id=150655664267
+Password: rtiath 
+
 1. Product Media Carousel is added
 https://www.awesomescreenshot.com/image/60527567?key=d4a31cc508694805c7ebc80a19e1f1cd
 2. This is the rating with the unit sold block.
@@ -16,5 +19,8 @@ https://www.awesomescreenshot.com/image/60527755?key=1b58e229e35d915ca508766ebb6
 https://www.awesomescreenshot.com/image/60527764?key=e626f0083b2a3cc0986c84b9639d38d9
 8. I created a custom sticky add to cart section. And where I also show the ratings which are dynamic based on the Judge me App data. This section hides when an actual add to cart appears and shows when Actual add to cart not shows that sticky add to cart section appears.
 https://www.awesomescreenshot.com/image/60527825?key=43e07c62e37c5a2d93a9b11102a7774d
+
+
+
 
 
